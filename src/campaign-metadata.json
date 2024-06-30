@@ -1,0 +1,23 @@
+{
+    "campaigns": [
+      {
+        "campaignId": "1",
+        "name": "Campaign 1",
+        "description": "This is the first campaign.",
+        "contractAddress": "0x1234567890abcdef1234567890abcdef12345678",
+        "goal": "100 ETH",
+        "raised": "25 ETH",
+        "deadline": "2024-12-31T23:59:59Z"
+      },
+      {
+        "campaignId": "2",
+        "name": "Campaign 2",
+        "description": "This is the second campaign.",
+        "contractAddress": "0xabcdef1234567890abcdef1234567890abcdef12",
+        "goal": "200 ETH",
+        "raised": "100 ETH",
+        "deadline": "2024-11-30T23:59:59Z"
+      }
+    ]
+  }
+  

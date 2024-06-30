@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import WalletConnector from './components/walletConnector';
+import QRCodeGenerator from './components/QRCodeGenerator';
 
-function App() {
+const App = () => {
+  const [account, setAccount] = useState(null);
+  const contractAddress = "0xF984Eb190c4F6af1a3A8bA328884c8956A266f83"; // Replace with your actual contract address
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <WalletConnector onConnected={setAccount} />
+      {account && <QRCodeGenerator contractAddress={contractAddress} />}
     </div>
   );
-}
+};
 
 export default App;

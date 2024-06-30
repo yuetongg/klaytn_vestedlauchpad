@@ -1,0 +1,26 @@
+{
+    "contractAddress": "0x224F55f264e07793A23930c5cE13ded257dfa2f0",
+    "vendorAddress": "0xabcdef1234567890abcdef1234567890abcdef12",
+    "campaignId": "1234",
+    "campaignName": "Project XYZ",
+    "description": "Fundraising for Project XYZ",
+    "suggestedContribution": "100",
+    "tokenType": "KLAY",
+    "milestones": [
+      {
+        "id": "1",
+        "description": "Initial Development",
+        "fundReleasePercentage": "50%"
+      },
+      {
+        "id": "2",
+        "description": "Product Launch",
+        "fundReleasePercentage": "50%"
+      }
+    ],
+    "expirationDate": "2024-12-31T23:59:59Z",
+    "nonce": "unique_nonce_value",
+    "callbackURL": "https://vestedlaunchpad.com/campaign/1234",
+    "instructions": "Scan to connect your wallet and contribute to Project XYZ."
+  }
+  
