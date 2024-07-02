@@ -1,16 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import SendFunds from './components/SendFunds';
+import VestingScanner from './components/VestingScanner'; // Adjust the import path as per your project structure
 
-const App = () => {
+function App() {
   return (
-    <Router basename="/klaytn_vestedlaunchpad">
-      <Switch>
-        <Route path="/send-funds/:recipientAddress?" component={SendFunds} />
-        {/* Other routes */}
-      </Switch>
-    </Router>
+    <div className="App">
+      <header className="App-header">
+        <h1>Vested Launchpad Scanner</h1>
+      </header>
+      <main>
+        <VestingScanner />
+      </main>
+      <footer>
+        <p>&copy; 2024 Your Company</p>
+      </footer>
+    </div>
   );
-};
+}
 
 export default App;
