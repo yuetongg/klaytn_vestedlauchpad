@@ -72,16 +72,16 @@ function VestingScanner() {
                 delay={300}
                 onError={handleError}
                 onScan={handleScan}
-                style={{ width: '100%' }}
+                style={{ width: '50%' }}
             />
             {vestingInfo && (
                 <div>
                     <h3>Vesting Info</h3>
                     <p>Beneficiary: {vestingInfo.beneficiary}</p>
                     <p>Total Amount: {vestingInfo.totalAmount}</p>
-                    <p>Start: {vestingInfo.start}</p>
-                    <p>Cliff: {vestingInfo.cliff}</p>
-                    <p>Duration: {vestingInfo.duration}</p>
+                    <p>Start: {vestingInfo.start*1000}</p>
+                    <p>Cliff: {vestingInfo.cliff/86400} days</p>
+                    <p>Duration: {vestingInfo.duration/86400} days</p>
                     <button onClick={initializeVesting}>Initialize Vesting</button>
                 </div>
             )}

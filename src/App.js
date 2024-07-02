@@ -10,9 +10,6 @@ function App() {
       <main>
         <VestingScanner />
       </main>
-      <footer>
-        <p>&copy; 2024 Your Company</p>
-      </footer>
     </div>
   );
 }
