@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { ethers } from 'ethers';
 import { QrReader } from 'react-qr-reader';
 
 function VestingScanner() {
     const [vestingInfo, setVestingInfo] = useState(null);
     const [wallet, setWallet] = useState(null);
+    const [showScanner, setShowScanner] = useState(true);
+    const [account, setAccount] = useState(null);
 
-    const handleScan = (data) => {
-        if (data) {
-            const info = JSON.parse(data);
-            setVestingInfo(info);
+    useEffect(() => {
+        // Prompt user to connect wallet on mount
+        if (!wallet) {
+            connectWallet();
         }
-    };
+    }, [wallet]);
 
-    const handleError = (err) => {
-        console.error(err);
+    const handleResult = (result, error) => {
+        if (result) {
+            console.log("Scanned Data:", result?.text); // Log the scanned data
+            try {
+                const info = JSON.parse(result?.text);
+                setVestingInfo(info);
+                setShowScanner(false); // Close the scanner
+            } catch (error) {
+                console.error("Failed to parse JSON data:", error);
+            }
+        }
+
+        if (error) {
+            console.error("QR Scan Error:", error);
+        }
     };
 
     const connectWallet = async () => {
@@ -22,7 +37,11 @@ function VestingScanner() {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             await provider.send("eth_requestAccounts", []);
             const signer = provider.getSigner();
+            const address = await signer.getAddress();
+
             setWallet(signer);
+            setAccount(address);
+
         } else {
             console.log("No Ethereum wallet detected");
         }
@@ -67,21 +86,26 @@ function VestingScanner() {
 
     return (
         <div>
-            <button onClick={connectWallet}>Connect Wallet</button>
-            <QrReader
-                delay={300}
-                onError={handleError}
-                onScan={handleScan}
-                style={{ width: '50%' }}
-            />
+            {account ? (
+                <p>Connected Account: {account}</p>
+            ) : (
+                <button onClick={connectWallet}>Connect Wallet</button>
+            )}
+            {showScanner && (
+                <QrReader
+                    delay={300}
+                    onResult={handleResult}
+                    style={{ width: '50%' }}
+                />
+            )}
             {vestingInfo && (
                 <div>
                     <h3>Vesting Info</h3>
                     <p>Beneficiary: {vestingInfo.beneficiary}</p>
-                    <p>Total Amount: {vestingInfo.totalAmount}</p>
-                    <p>Start: {vestingInfo.start*1000}</p>
-                    <p>Cliff: {vestingInfo.cliff/86400} days</p>
-                    <p>Duration: {vestingInfo.duration/86400} days</p>
+                    <p>Total Amount: {vestingInfo.totalAmount} token in weis</p>
+                    <p>Start: {new Date(vestingInfo.start * 1000).toLocaleString()}</p>
+                    <p>Cliff: {vestingInfo.cliff / 86400} days</p>
+                    <p>Duration: {vestingInfo.duration / 86400} days</p>
                     <button onClick={initializeVesting}>Initialize Vesting</button>
                 </div>
             )}
