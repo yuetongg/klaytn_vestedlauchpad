@@ -1,0 +1,16 @@
+[
+    {
+        "beneficiary": "0xBeneficiaryAddress1",
+        "totalAmount": "1000000000000000000000", 
+        "start": 1688019200, 
+        "cliff": 2592000, 
+        "duration": 31536000 
+    },
+    {
+        "beneficiary": "0xBeneficiaryAddress2",
+        "totalAmount": "500000000000000000000", 
+        "start": 1688019200, 
+        "cliff": 2592000, 
+        "duration": 31536000 
+    }
+]
